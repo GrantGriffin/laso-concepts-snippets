@@ -1,0 +1,31 @@
+<div class="timeline crud-site-home_timeline">
+    <!-- begin timeline-body -->
+    <div class="timeline-body crud-site-home_body">
+        <div class="timeline-header row">
+            <span class="userimage">
+                <img class="messages-component_img" ng-src="{{mc.message.profile.profileOverrides.imageUrl ? mc.message.profile.profileOverrides.imageUrl:mc.message.profile.user.defaultImageUrl}}"/>
+            </span>
+            <span class="username messages-component_name">
+                <a ui-sref="site.profile({id:mc.message.profile.id})">{{mc.message.profile.profileOverrides.name ? mc.message.profile.profileOverrides.name : mc.message.profile.user.defaultProfileName
+                    }}</a>
+                <small ng-cloak class="messages-component_relationship">{{mc.message.relationship}}</small>
+            </span>
+            <span class="pull-right text-muted">
+                <a ui-sref="site.home.detail({id: mc.message._id})">{{mc.message.dateCreated | date:"short"}}</a>
+            </span>
+        </div>
+        <div class="timeline-content">
+            <p ng-bind-html="mc.message.content"></p>
+            <a href="{{attachment}}" class="btn btn-white" ng-repeat="attachment in mc.message.attachmentUrls track by $index"> Attachment &nbsp; {{$index + 1}}</a>
+        </div>
+        <div class="timeline-footer">
+            <a href="javascript:;">
+                <i class="fa fa-comments fa-fw"></i> Comment</a>
+            <a ng-click="mc.flagModal()" class='pull-right'>
+                &nbsp; <i class="fa fa-flag fa-fw"></i> Flag</a>
+            <a ui-sref="site.home" ng-if="mc.$state.includes('site.home.detail')" class="pull-right">
+                <i class="fa fa-reply"></i> Back</a>
+        </div>
+    </div>
+    <!-- end timeline-body -->
+</div>

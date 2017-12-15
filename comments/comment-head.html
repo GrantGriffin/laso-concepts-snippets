@@ -1,0 +1,10 @@
+<div class='page-header'>
+    <div class='btn-toolbar pull-right'>
+        <div class='btn-group'>
+            <button type='button' class='btn btn-success'  ng-disabled="headCtrl.disable()" ui-sref=".create">Create</button>
+        </div>
+    </div>
+    <h3 class="crud-comments_tagline" ui-sref=".list({page: 1})">{{headCtrl.tagline}}</h3>
+</div>
+
+<div ui-view="view"></div>

@@ -1,0 +1,46 @@
+<div class="panel panel-inverse" data-sortable-id="form-stuff-2">
+    <div class="panel-heading">
+        <h4 class="panel-title">{{editCtrl.tagline}}</h4>
+    </div>
+    <div class="panel-body">
+        <form name="editCtrl.mainForm">
+            <div class="form-group">
+                <label class="control-label">Id:</label>
+                <p class="form-control-static">{{editCtrl.comment._id}}</p>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Profile Id:</label>
+                <p class="form-control-static">{{editCtrl.comment.profileId}}</p>
+            </div>
+            <div class="form-group" ng-class="{'has-error': editCtrl.validateHex(editCtrl.mainForm.subjectId)}">
+                <label class="control-label">Subject Id:</label>
+                <input class="form-control" ng-model="editCtrl.comment.subject.id" required name="subjectId" placeholder="24 digit hex required">
+                <div class="help-block" ng-show="editCtrl.validateHex(editCtrl.mainForm.subjectId)">This field must contain a valid 24digit hex object id</div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Subject Type:</label>
+                <select class="form-control" name="type" ng-model="editCtrl.comment.subject.type">
+                    <option value="Blog Article">Blog Article</option>
+                    <option value="FAQ Entry">FAQ Entry</option>
+                    <option value="Message">Message</option>
+                </select>
+            </div>
+            <div class="form-group" ng-class="{'has-error': editCtrl.validate(editCtrl.mainForm.comment)}">
+                <label class="control-label">Comment:</label>
+                <textarea ng-model="editCtrl.comment.content" required name="comment" class="form-control" placeholder="Textarea" maxlength="1000" rows="5"></textarea>
+                <div class="help-block" ng-show="editCtrl.validate(editCtrl.mainForm.comment)">This field is required</div>
+            </div>
+            <div>
+                <div class="btn-group">
+                    <button type="button" ng-click="editCtrl.submit()" ng-disabled="editCtrl.mainForm.$invalid" class="btn btn-success">{{editCtrl.submitText}}</button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" ng-click="editCtrl.reset()" class="btn btn-white">Reset</button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" ng-click="editCtrl.clearId()" ui-sref="site.comments.list" class="btn btn-white">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

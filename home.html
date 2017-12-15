@@ -1,0 +1,62 @@
+<div class="news-feed-home_width">
+    <h4 class="news-feed-home_header">{{hc.channelHeader()}}</h4>
+</div>
+<ul class="timeline crud-site-home_timeline">
+    <!-- flot -->
+    <li class="timeline-body crud-site-home_body crud-site-home_flotChart" ng-show="hc.showChart">
+        <div class="panel panel-inverse" data-sortable-id="flot-chart-2">
+            <!-- panel heading -->
+            <div class="panel-heading">
+                <h4 class="panel-title">Weekly Activity - Percent of Live Clients Posted to Channel</h4>
+            </div>
+            <!-- panel body -->
+            <div class="panel-body">
+                <flot id="interactive-chart" class="height-sm" dataset="hc.myData" options="hc.myChartOptions" height="300px"></flot>
+            </div>
+        </div>
+    </li>
+    
+    <!-- timeline -->
+    <li>
+        <!-- begin timeline-body -->
+        <div class="timeline-body crud-site-home_body">
+            <div class="timeline-header">
+                <span class="userimage">
+                    <img class="messages-component_img" ng-src="{{hc.currentProfile.profileOverrides.imageUrl ? hc.currentProfile.profileOverrides.imageUrl : hc.currentProfile.user.defaultImageUrl}}" />
+                </span>
+                <span class="username">
+                    <a href="javascript:;">{{hc.currentProfile.profileOverrides.name ? hc.currentProfile.profileOverrides.name : 'Client'}}</a>
+                    <small></small>
+                </span>
+                <span class="pull-right text-muted"></span>
+            </div>
+            <div class="timeline-content">
+                <textarea maxlength="200" name="messageContent" ng-model="hc.postData.content" rows="3" cols="9" placeholder="What's on your mind....?"
+                    wrap="soft" class="form-control layout-site-home_textarea"></textarea>
+                </textarea>
+                <hr>
+                <button ng-click="hc.postMessage()" class="pull-right btn btn-success" ng-disabled="!hc.postData.destination.id">Post</button>
+                <select ng-show="hc.multipleLocationsCase.activated" class="col-md-3 default-select2 form-control pull-right crud-site-home_locationSelector" ng-model="hc.multipleLocationsCase.destinationObj"
+                    ng-options="channel as channel.name for channel in hc.locationChannels | filter:  {institutionId: hc.filterByInstitution()}" ng-change="hc.selectLocationFromMultiple()">
+                    <option value="" selected disabled>Post From</option>
+                </select>
+                <small>{{4000 - hc.postData.content.length}} characters remaining </small>
+            </div>
+            <div class="timeline-footer layout-site-home_timelineFooter">
+                <div class="col-xs-6 layout-site-home-timelineFooterIcon">
+                    <a href="javascript:;" class="">
+                        <i class="fa fa-camera"></i> Attachment </a>
+                </div>
+                <div class="col-xs-6 layout-site-home_visibility">
+                    <select class="default-select2 form-control" ng-model="hc.selectedChannel" ng-change="hc.selectChannel()" ng-options="channel as channel.name for channel in hc.myChannels">
+                    </select>
+                </div>
+            </div>
+            <!-- end timeline-body -->
+    </li>
+</ul>
+
+<!-- - - - - - - - - - - - - - - - - -  DISPLAY ALL MESSAGES  - - - - - - - - - - - - - - - - - - - -  -->
+<div infinite-scroll='hc.loadMore()' infinite-scroll-disabled="hc.busy" infinite-scroll-immediate-check='false' infinite-scroll-distance='0.01'>
+    <messages message="message" ng-repeat="message in hc.messages | orderBy: '-dateCreated'"></messages>
+</div>

@@ -1,0 +1,48 @@
+<div class="panel panel-inverse" data-sortable-id="table-basic-4">
+    <div class="panel-heading">
+
+        <h4 class="panel-title">{{commentCtrl.tagline}}</h4>
+    </div>
+    <div class="panel-body">
+        <form>
+            <div class="form-group">
+                <label class="control-label">Id</label>
+                <p class="form-control-static">{{commentCtrl.comment._id}}</p>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Creator Profile Id</label>
+                <p class="form-control-static">{{commentCtrl.comment.profileId}}</p>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Subject Id</label>
+                <p class="form-control-static">{{commentCtrl.comment.subject.id}}</p>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Subject Type</label>
+                <p class="form-control-static">{{commentCtrl.comment.subject.type}}</p>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Date Created</label>
+                <p class="form-control-static">{{commentCtrl.comment.dateCreated | date : 'medium'}}</p>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Date Modified</label>
+                <p class="form-control-static">{{commentCtrl.comment.dateModified |date : 'medium'}}</p>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Date Deactivated</label>
+                <p class="form-control-static">{{commentCtrl.comment.dateDeactivated || "None"| date : 'medium'}}</p>
+            </div>
+            <div class="btn-group">
+                <button type="button" ui-sref="^.list" class="btn btn-white">Cancel</button>
+            </div>
+            <div class="btn-group">
+                <button type="button" ui-sref="site.comments.list.edit({id: commentCtrl.commentId})" class="btn btn-white">Edit</button>
+            </div>
+            <div class="btn-group">
+                <button type="button" ng-click="commentCtrl.openModal(commentCtrl.comment,commentCtrl.comment.subject.type )" class="btn btn-danger">Delete</button>
+            </div>
+        </form>
+    </div>
+
+</div>

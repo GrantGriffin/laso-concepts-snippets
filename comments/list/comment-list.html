@@ -1,0 +1,40 @@
+               <!-- begin panel -->
+                <div class="panel panel-inverse" data-sortable-id="table-basic-4">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">All Comments</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Creator Profile Id</th>
+                                        <th>Item Id</th>
+                                        <th>Type</th>
+                                        <th>Comment</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <tr ng-repeat="comment in commentCtrl.comments | filter: commentCtrl.listFilter()">
+                                            <td>{{comment.profileId}}</td>
+                                            <td>{{comment._id}}</td>
+                                            <td>{{comment.subject.type}}</td>
+                                            <td>
+                                                <div>{{comment.content | limitTo: 100}}</div>
+                                            </td>
+                                            <td>
+                                                <button ui-sref="^.details({id: comment._id})" class="btn btn-md btn-white btn-icon btn-circle fa fa-eye" uib-popover="Details"
+                                                popover-placement="bottom" popover-class="crudPopover"popover-trigger="'mouseenter'"></button>
+                                                <button ui-sref="site.comments.list.edit({id: comment._id})" class="btn btn-md btn-white btn-icon btn-circle fa fa-pencil" uib-popover="Edit"
+                                                popover-placement="bottom" popover-class="crudPopover"popover-trigger="'mouseenter'"></button>
+                                                <button ng-click="commentCtrl.openModal(comment,comment.subject.type )" class="btn btn-md btn-danger btn-icon btn-circle fa fa-times" uib-popover="Delete"
+                                                popover-placement="bottom" popover-class="crudPopover"popover-trigger="'mouseenter'"></button>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+<div ui-view="edit"></div>
